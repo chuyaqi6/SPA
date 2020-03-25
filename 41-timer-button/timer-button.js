@@ -1,41 +1,71 @@
-var $timerButton = (function() {
-  var $btn = $('<input class="timer-button" type="button" value="发送验证码（6s）" disabled>'),
-      num=6,
+function TimerButton(){
+  var $btn = $('<input class="timer-button" type="button" disabled>'),
+      cfg = {
+        container:'body',      
+        num:6,
+        title:'发送验证码',
+        onClick:null
+      },
+      num,
       timer;
-      //cfg = config,
-    //  enabled = cfg.enabled;
-  
-  function show(container){
-    if(timer) clearInterval(timer);
     // 1.DOM draw
-    //if(num===0){
-      //num = 6;
-    //}
-    $(container).append($btn);
-    num=6;
+  this.show = function (conf){
+    $(cfg.container).append($btn);
+    $.extend(cfg,conf);
+    num=cfg.num;
     // 2.event bind
-    $btn.attr('disabled');
+    $btn.val(cfg.title+'('+cfg.num+'s)');
     timer = setInterval(function() {
       num --;
       if(num === 0) {
         clearInterval(timer);
-        $btn.val('发送验证码');
+        $btn.val(cfg.title);
         $btn.removeAttr('disabled');
       }else{
-        $btn.val('发送验证码（'+ num +'s）');
+        $btn.val(cfg.title+'('+ num +'s)');
         //$btn.attr('disabled');
       }
     }, 1000);
+    $btn.click(cfg.onClick);
   }
-  $btn.click(function() {
-    alert('已发送');
-  });
+};
+//函数工厂，返回一个对象
+var $timerButton = (function() {
+  function show(conf){
+    var $btn = $('<input class="timer-button" type="button" disabled>'),
+         cfg = {
+           container:'body',      
+           num:6,
+           title:'发送验证码',
+           onClick:null
+         },
+         num,
+         timer;
+    // 1.DOM draw
+    $(cfg.container).append($btn);
+    $.extend(cfg,conf);
+    num=cfg.num;
+    // 2.event bind
+    $btn.val(cfg.title+'('+cfg.num+'s)');
+    timer = setInterval(function() {
+      num --;
+      if(num === 0) {
+        clearInterval(timer);
+        $btn.val(cfg.title);
+        $btn.removeAttr('disabled');
+      }else{
+        $btn.val(cfg.title+'('+ num +'s)');
+        //$btn.attr('disabled');
+      }
+    }, 1000);
+    $btn.click(cfg.onClick);
+  }
 
   return {
     show: show
-  }  
-
+  } 
 }());
+
 
 // 不用 page load event
 

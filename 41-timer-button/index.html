@@ -21,11 +21,54 @@
   <script src="./timer-button.js"></script>
   <script>
     $(function() {
-      var $btnAdd = $('#add');
-
-      $btnAdd.click(function(){
-        $timerButton.show('#main');
+      //构造函数方法
+      
+      
+      //页面加载之后
+      var tb1 = new TimerButton();
+      tb1.show({
+        num:9,
+        title:'发送验证码',
+        onClick:function(){
+          alert('短信已发送');
+        }
       });
+
+      //点击添加按钮后
+      var $btnAdd = $('#add');
+      $btnAdd.click(function(){
+        var tb = new TimerButton();
+        tb.show({
+          num:6,
+          title:'发送验证码',
+          onClick:function(){
+            alert('已发送');
+          }
+        });
+      })
+      
+      /*对象
+      //页面加载之后
+      $timerButton.show({
+        num:9,
+        title:'发送验证码',
+        onClick:function(){
+          alert('短信已发送');
+        }
+      });
+      
+      //点击添加按钮后
+      var $btnAdd = $('#add');
+      $btnAdd.click(function(){
+        $timerButton.show({
+          num:6,
+          title:'发送验证码',
+          onClick:function(){
+            alert('已发送');
+          }
+        });
+      });
+      */
     }); 
   </script>
 </body>
