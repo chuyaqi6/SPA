@@ -11,10 +11,11 @@
       
     </div>
     <script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="./js/wheel.js"></script>
+    <script src="./js/main.js"></script>
     <script>
       $(function(){
-        var $box = new WheelBox({
+        var wheel = new WheelBox();
+        wheel.show({
           container:'#box',
           imgs:[
             'img/b1.png','img/b2.png','img/b3.png','img/b4.png','img/b5.png'
