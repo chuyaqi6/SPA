@@ -15,13 +15,13 @@ module.exports = function (grunt) {
       options: {
         csslintrc: '.csslintrc'
       },
-      src: ['css/*.css', '0?-*/*.css']
+      src: ['css/*.css', '0?-*/*.css','**/*.css']
     },
     htmlhint: {
       options: {
         htmlhintrc: '.htmlhintrc'
       },
-      src: ['*.html', '0?-*/*.html']
+      src: ['*.html', '0?-*/*.html','**/*.html']
     },
     htmlmin: {
       options: {
@@ -30,14 +30,14 @@ module.exports = function (grunt) {
       },
       files: {
         expand: true,
-        src: ['*.html', '??-*/*.html', '??-*/??-*/*.html'],
+        src: ['*.html', '??-*/*.html', '??-*/??-*/*.html','**/*.html'],
         dest: 'dist/'
       }
     },
     cssmin: {
       files:{
         expand: true,
-        src: ['css/*.css', '??-*/*.css', '??-*/??-*/*.css', '??-*/css/*.css'],
+        src: ['css/*.css', '??-*/*.css', '??-*/??-*/*.css', '??-*/css/*.css','**/*.css','**/css/*.css'],
         dest: 'dist/'
       }
     },
@@ -45,9 +45,16 @@ module.exports = function (grunt) {
       main:{
         files: [{
           expand: true,
-          src: ['js/*.js', '??-*/*.js', '??-*/0?-*/*.js', '??-*/js/*.js'],
+          src: ['js/*.js', '??-*/*.js', '??-*/0?-*/*.js', '??-*/js/*.js','**/js/*.js'],
           dest: 'dist/'
         }]
+      }
+    },
+    imagemin: {                               
+      files: {
+        expand: true,
+        src: ['**/*.{png,jpg,gif}','**/img/*.{png,jpg,gif}'],
+        dest: 'dist/'
       }
     }
   });
@@ -58,7 +65,8 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-htmlmin');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-imagemin');
 
   grunt.registerTask('lint', ['htmlhint','csslint','eslint']);
-  grunt.registerTask('minify', ['htmlmin', 'cssmin', 'uglify']);
+  grunt.registerTask('minify', ['htmlmin', 'cssmin', 'uglify','imagemin']);
 };
