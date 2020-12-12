@@ -1,0 +1,1 @@
+$(function(){var a,e=$("#box"),l=9;e.val("同意 ("+l+" s)"),e.attr("disabled","disabled"),a=setInterval(function(){e.val("同意 ("+l--+" s)"),-1===l&&(window.clearInterval(a),e.val("同意"),e.removeAttr("disabled"))},1e3),e.click(function(){alert("就知道你会同意的！")})});

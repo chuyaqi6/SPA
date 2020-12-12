@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0"><link rel="stylesheet" href="./password.css"><title>密码可见测试页面</title><link rel="icon" href="https://i.wangding.in/favicon.ico" sizes="48x48" type="image/png"></head><body><input id="add-pwd" type="button" value="添加密码框"> <input id="get-pwd" type="button" value="获得密码" disabled="disabled"><hr><div id="main"></div><script src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script><script src="./password.js"></script><script>$(function() {
+      //点击添加按钮后
+      var pwdTextboxs = [];
+      var $btnAdd = $('#add-pwd');
+      var $btnGet = $('#get-pwd');
+      $btnAdd.click(function(){
+        var pwd = new PasswordBox({'container':'#main'});
+        pwdTextboxs.push(pwd);
+        $btnGet.removeAttr('disabled');
+      });
+      //点击获取按钮
+      $btnGet.click(function(){
+        pwdTextboxs.forEach(function(pwd){
+          alert(pwd.getPwd());
+        })
+      })
+    });</script></body></html>
